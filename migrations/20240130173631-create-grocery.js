@@ -24,6 +24,9 @@ module.exports = {
         allowNull: false,
         type: Sequelize.INTEGER,
       },
+      quantityType: {
+        type: Sequelize.ENUM("KG", "UNIT"),
+      },
       priceType: {
         type: Sequelize.ENUM("PER_KG", "PER_UNIT"),
       },
@@ -32,6 +35,7 @@ module.exports = {
       },
       imageUrl: {
         type: Sequelize.STRING,
+        allowNull: true,
       },
       createdAt: {
         allowNull: false,

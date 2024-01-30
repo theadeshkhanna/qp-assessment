@@ -19,6 +19,7 @@ module.exports = (sequelize, DataTypes) => {
       priceType: DataTypes.ENUM("PER_KG", "PER_UNIT"),
       price: DataTypes.INTEGER,
       imageUrl: DataTypes.STRING,
+      quantityType: DataTypes.ENUM("KG", "UNIT"),
     },
     {
       sequelize,
