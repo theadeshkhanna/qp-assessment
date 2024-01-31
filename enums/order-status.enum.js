@@ -1,0 +1,11 @@
+const OrderStatusEnum = {
+  PENDING: "PENDING",
+  PROCESSING: "PROCESSING",
+  SHIPPED: "SHIPPED",
+  DELIVERED: "DELIVERED",
+  CANCELLED: "CANCELLED",
+  REFUNDED: "REFUNDED",
+  RETURNED: "RETURNED",
+};
+
+module.exports = OrderStatusEnum;

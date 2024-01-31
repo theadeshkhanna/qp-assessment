@@ -1,43 +1,37 @@
 "use strict";
-const GroceryQuantityTypeEnum = require("../enums/grocery-quantity-type.enum");
-const GroceryPriceTypeEnum = require("../enums/grocery-price-type.enum");
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable("Groceries", {
+    await queryInterface.createTable("GroceryOrders", {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      name: {
-        type: Sequelize.STRING,
-      },
-      quantityInWareHouse: {
-        type: Sequelize.INTEGER,
-      },
-      categoryId: {
+      groceryId: {
         foreignKey: true,
         references: {
-          model: "Categories",
+          model: "Groceries",
           key: "id",
         },
         allowNull: false,
         type: Sequelize.INTEGER,
       },
-      quantityType: {
-        type: Sequelize.ENUM(Object.values(GroceryQuantityTypeEnum)),
-      },
-      priceType: {
-        type: Sequelize.ENUM(Object.values(GroceryPriceTypeEnum)),
-      },
-      price: {
+      orderId: {
+        foreignKey: true,
+        references: {
+          model: "Orders",
+          key: "id",
+        },
+        allowNull: false,
         type: Sequelize.INTEGER,
       },
-      imageUrl: {
-        type: Sequelize.STRING,
-        allowNull: true,
+      quantity: {
+        type: Sequelize.INTEGER,
+      },
+      subtotal: {
+        type: Sequelize.INTEGER,
       },
       createdAt: {
         allowNull: false,
@@ -50,6 +44,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable("Groceries");
+    await queryInterface.dropTable("GroceryOrders");
   },
 };

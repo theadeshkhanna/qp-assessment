@@ -10,6 +10,14 @@ class CustomerService {
       userId: userId,
     });
   }
+
+  async getCustomerFromUserId(userId) {
+    return await db.Customer.findOne({
+      where: {
+        userId: userId,
+      },
+    });
+  }
 }
 
 module.exports = {

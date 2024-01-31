@@ -10,6 +10,12 @@ class AdminService {
       userId: userId,
     });
   }
+
+  async getAdminByUserId(id) {
+    return await db.Admin.findOne({
+      where: { id: id },
+    });
+  }
 }
 
 module.exports = {

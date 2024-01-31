@@ -1,4 +1,5 @@
 const db = require("../models/index");
+const { Op } = require("sequelize");
 
 class GroceryService {
   static getInstance() {
@@ -29,6 +30,14 @@ class GroceryService {
     return await db.Grocery.findAll();
   }
 
+  async getGroceriesByIds(ids) {
+    return await db.Grocery.findAll({
+      where: {
+        id: ids,
+      },
+    });
+  }
+
   async deleteGroceryById(id) {
     return await db.Grocery.destroy({
       where: {
@@ -46,8 +55,9 @@ class GroceryService {
       grocery.name = payload.name;
     }
 
-    // handle 0 case here
-    if (payload.quantityInWareHouse) {
+    // Handling it like this because it can be 0 as well, and for
+    // that it will become falsely and will not update
+    if ("quantityInWareHouse" in payload) {
       grocery.quantityInWareHouse = payload.quantityInWareHouse;
     }
 
@@ -68,21 +78,6 @@ class GroceryService {
     }
 
     await grocery.save();
-    // await grocery.update(
-    //     {
-    //         name: payload?.name,
-    //         quantityInWareHouse: payload?.quantityInWareHouse,
-    //         categoryId: payload?.categoryId,
-    //         priceType: payload?.priceType,
-    //         price: payload?.price,
-    //         imageUrl: payload?.imageUrl
-    //     },
-    //     {
-    //         where: {
-    //             id: id,
-    //         },
-    //     },
-    // );
   }
 }
 

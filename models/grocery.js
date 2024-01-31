@@ -1,5 +1,7 @@
 "use strict";
 const { Model } = require("sequelize");
+const GroceryQuantityTypeEnum = require("../enums/grocery-quantity-type.enum");
+const GroceryPriceTypeEnum = require("../enums/grocery-price-type.enum");
 module.exports = (sequelize, DataTypes) => {
   class Grocery extends Model {
     /**
@@ -8,7 +10,7 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // define association here
+      this.hasMany(models.GroceryOrder, { foreignKey: "groceryId" });
     }
   }
   Grocery.init(
@@ -16,10 +18,10 @@ module.exports = (sequelize, DataTypes) => {
       name: DataTypes.STRING,
       quantityInWareHouse: DataTypes.INTEGER,
       categoryId: DataTypes.INTEGER,
-      priceType: DataTypes.ENUM("PER_KG", "PER_UNIT"),
+      priceType: DataTypes.ENUM(Object.values(GroceryPriceTypeEnum)),
       price: DataTypes.INTEGER,
       imageUrl: DataTypes.STRING,
-      quantityType: DataTypes.ENUM("KG", "UNIT"),
+      quantityType: DataTypes.ENUM(Object.values(GroceryQuantityTypeEnum)),
     },
     {
       sequelize,
