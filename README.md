@@ -41,8 +41,8 @@ Follow the instructions below to get a copy of the project up and running on you
 1. Clone the repository:
 
     ```bash
-    git clone https://github.com/your-username/grocery-booking-api.git
-    cd grocery-booking-api
+    git clone https://github.com/theadeshkhanna/qp-assessment.git
+    cd qp-assessment
     ```
 
 2. Install dependencies:
